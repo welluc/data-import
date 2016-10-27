@@ -1,6 +1,6 @@
-importFile <- function(datapath=g_datapath, filename=g_filename, nfilegrp, colid=g_colid) {
+importFile <- function(filename, nfilegrp, colid) {
   
-  rbindLoop <- function(dt, rbl_datapath=datapath, rbl_filename=filename, rbl_colname=colid) {
+  rbindLoop <- function(dt, rbl_filename=filename, rbl_colname=colid) {
     
     if (length(rbl_filename) > 0 & nrow(dt) > 0) {
       j <- 1
@@ -8,9 +8,9 @@ importFile <- function(datapath=g_datapath, filename=g_filename, nfilegrp, colid
       # only execute loop if still have files to read
       MAXITER <- length(rbl_filename)
       while (j <= MAXITER) {
-
+        
         tempdt <- fread(
-          input=file.path(rbl_datapath, rbl_filename[j]),
+          input=rbl_filename[j],
           header=TRUE,
           verbose=FALSE,
           showProgress=FALSE,
@@ -32,9 +32,9 @@ importFile <- function(datapath=g_datapath, filename=g_filename, nfilegrp, colid
   fileindex <- as.integer(seq(1, length(filename), length.out=nfilegrp))
   MAXFILEINDEX <- length(fileindex)
   
-  foo <- function(b, foofileindex=fileindex, foodatapath=datapath, foofilename=filename, fooinvcolid=colid) {
+  foo <- function(b, foofileindex=fileindex, foofilename=filename, fooinvcolid=colid) {
     dt <- fread(
-      input=file.path(foodatapath, foofilename[foofileindex[b]]),
+      input=foofilename[foofileindex[b]],
       header=TRUE,
       verbose=FALSE,
       showProgress=FALSE,
