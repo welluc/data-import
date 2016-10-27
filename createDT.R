@@ -5,15 +5,14 @@ createDT <-
     w_colid,
     w_newcolid,
     w_nfilegrp=20,
-    w_dbpath,
+    w_filepath,
     w_savefile,
     w_writeout=TRUE
   ) {
     
     # import from disk:
     dt <- importFile(
-      datapath=w_dbpath,
-      filename=list.files(w_dbpath, pattern='.txt'),
+      filename=w_filepath,
       nfilegrp=w_nfilegrp,
       colid=w_colid
     )
@@ -34,11 +33,11 @@ createDT <-
     }
   }
 
-# for ServerData/Order:
-# dt_v3 <- createDT(
-#   w_colid=c('ORDER_DATE'),
-#   w_newcolid=c('OrderDate'),
-#   w_nfilegrp=50,
-#   w_dbpath='~/ServerDBData/Order',
+# Example:
+# dt_v4 <- createDT(
+#   w_colid=c('Valuation Date', 'Branch Number', 'Product Number', 'Primary UPC'),
+#   w_newcolid=c('ValDate', 'BranchNumber', 'EclipseID', 'PrimaryUPC'),
+#   w_nfilegrp=20,
+#   w_filepath=list.files('C:/Users/datausr/Desktop/ServerDBData/Inventory', pattern='.txt', full.names=TRUE),
 #   w_savefile='',
 #   w_writeout=FALSE)
