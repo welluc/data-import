@@ -105,6 +105,9 @@ readOracleDB <- function(
       
     }
     
+    # check all records fetched
+    c1 <- dbHasCompleted(numres)
+    
   ########################################
   # Read Subset of Database Table:
   ########################################
@@ -130,14 +133,13 @@ readOracleDB <- function(
       }
     }
     
+    # check all records fetched
+    c1 <- NA
   }
   
   ########################################
   # Cleanup and Return:
   ########################################
-  
-  # check all records fetched
-  c1 <- dbHasCompleted(numres)
   
   # clear result
   dbClearResult(numres)
